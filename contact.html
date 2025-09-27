@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Ensar Janova</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("_6iCeax88aI0A31pa"); // Replace with your actual EmailJS public key
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44B5;
+            --accent: #FF6584;
+            --dark: #2D2B55;
+            --light: #F8F9FA;
+            --text: #333333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: rgba(45, 43, 85, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(45, 43, 85, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--primary); }
+            to { text-shadow: 0 0 20px var(--accent), 0 0 30px var(--primary); }
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .contact-section {
+            padding: 150px 0 100px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 3rem;
+            position: relative;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 4rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1.2rem 1.2rem 1.2rem 3.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            font-size: 1rem;
+            color: var(--light);
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+        
+        textarea {
+            height: 150px;
+            padding: 1.2rem;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            z-index: 2;
+            font-size: 1.2rem;
+        }
+        
+        textarea + .input-icon {
+            top: 1.2rem;
+            transform: none;
+        }
+        
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.3);
+        }
+        
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover:not(:disabled)::before {
+            left: 100%;
+        }
+        
+        button:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(108, 99, 255, 0.5);
+        }
+        
+        .info-item {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .info-item h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .info-item h3 i {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+        
+        .success {
+            color: #51cf66;
+            font-size: 1rem;
+            margin-top: 1rem;
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(81, 207, 102, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(81, 207, 102, 0.3);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        footer {
+            background: rgba(45, 43, 85, 0.9);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 85%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+        /* Enhanced form validation styles */
+input:invalid, textarea:invalid {
+    border-color: #ff6b6b !important;
+}
+
+input:valid, textarea:valid {
+    border-color: #51cf66 !important;
+}
+
+/* Character counter */
+.char-counter {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.char-counter.warning {
+    color: #ffa94d;
+}
+
+.char-counter.error {
+    color: #ff6b6b;
+}
+
+/* Success animation */
+@keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.success-animation {
+    animation: celebrate 0.6s ease;
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Ensar Janova</div>
+            <!-- In index.html, update the nav-links section -->
+<ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="learning.html">Learn Programming</a></li> <!-- Add this line -->
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html">Login</a></li>
+</ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h3><i class="fas fa-comments"></i> Let's Talk</h3>
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out to me using the contact form or through any of the methods below.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p>ensarjanova121@gmail.com</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <p>Based in Turkey</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-clock"></i> Response Time</h3>
+                        <p>I typically respond within 24 hours</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="error" id="nameError">Please enter your name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="error" id="emailError">Please enter a valid email</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-tag input-icon"></i>
+                                <input type="text" id="subject" required>
+                            </div>
+                            <div class="error" id="subjectError">Please enter a subject</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-comment input-icon"></i>
+                                <textarea id="message" required placeholder="Tell me about your project or inquiry..."></textarea>
+                            </div>
+                            <div class="error" id="messageError">Please enter your message</div>
+                        </div>
+                        
+                        <div class="loading" id="loadingIndicator">
+                            <div class="loading-spinner"></div>
+                            <p>Sending your message...</p>
+                        </div>
+                        
+                        <button type="submit" id="submitButton">
+                            <span id="buttonText">Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div class="error" id="formError">There was an error sending your message. Please try again.</div>
+                        <div class="success" id="formSuccess">Your message has been sent successfully! I'll get back to you soon.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 Ensar Janova. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+    // Initialize EmailJS with your Public Key
+    (function() {
+        emailjs.init("_6iCeax88aI0A31pa");
+    })();
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Reset messages
+        document.getElementById('nameError').style.display = 'none';
+        document.getElementById('emailError').style.display = 'none';
+        document.getElementById('subjectError').style.display = 'none';
+        document.getElementById('messageError').style.display = 'none';
+        document.getElementById('formError').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'none';
+        
+        let valid = true;
+        
+        // Enhanced validation
+        if (!name || name.trim().length < 2) {
+            document.getElementById('nameError').textContent = 'Please enter a valid name (min 2 characters)';
+            document.getElementById('nameError').style.display = 'block';
+            valid = false;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            document.getElementById('emailError').textContent = 'Please enter a valid email address';
+            document.getElementById('emailError').style.display = 'block';
+            valid = false;
+        }
+        
+        if (!subject || subject.trim().length < 5) {
+            document.getElementById('subjectError').textContent = 'Subject must be at least 5 characters long';
+            document.getElementById('subjectError').style.display = 'block';
+            valid = false;
+        }
+        
+        if (!message || message.trim().length < 10) {
+            document.getElementById('messageError').textContent = 'Message must be at least 10 characters long';
+            document.getElementById('messageError').style.display = 'block';
+            valid = false;
+        }
+        
+        if (!valid) return;
+        
+        // Show loading indicator
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        
+        submitButton.disabled = true;
+        buttonText.textContent = 'Sending...';
+        loadingIndicator.style.display = 'block';
+        
+        // Enhanced email parameters
+        const templateParams = {
+            from_name: name.trim(),
+            from_email: email.trim(),
+            subject: subject.trim(),
+            message: message.trim(),
+            to_email: "ensarjanova121@gmail.com",
+            reply_to: email.trim(),
+            date: new Date().toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short'
+            }),
+            website: "Ensar Janova Portfolio",
+            ip_address: "{{user_ip}}", // EmailJS will handle this
+            user_agent: "{{user_agent}}" // EmailJS will handle this
+        };
+        
+        // Send email using EmailJS with enhanced options
+        emailjs.send('service_d22j24c', 'template_y17nn2o', templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Enhanced success message
+                document.getElementById('formSuccess').innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Message Sent Successfully!</strong><br>
+                    I'll get back to you within 24 hours. Thank you!
+                `;
+                document.getElementById('formSuccess').style.display = 'block';
+                
+                // Save to localStorage as backup with more details
+                const contactData = {
+                    name: name.trim(),
+                    email: email.trim(),
+                    subject: subject.trim(),
+                    message: message.trim(),
+                    timestamp: new Date().toISOString(),
+                    status: 'sent',
+                    email_id: response.text
+                };
+                
+                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+                contacts.push(contactData);
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                // Enhanced form reset with animation
+                setTimeout(() => {
+                    document.getElementById('contactForm').reset();
+                    submitButton.disabled = false;
+                    buttonText.textContent = 'Send Message';
+                    loadingIndicator.style.display = 'none';
+                    
+                    // Add celebration animation
+                    submitButton.style.background = 'linear-gradient(45deg, #51cf66, #40c057)';
+                    setTimeout(() => {
+                        submitButton.style.background = 'linear-gradient(45deg, var(--primary), var(--accent))';
+                    }, 2000);
+                }, 3000);
+                
+            }, function(error) {
+                console.log('FAILED...', error);
+                
+                // Enhanced error handling
+                let errorMessage = 'There was an error sending your message. ';
+                
+                if (error.text.includes('quota')) {
+                    errorMessage += 'Email quota exceeded. Please try again later.';
+                } else if (error.text.includes('Invalid')) {
+                    errorMessage += 'Invalid email configuration.';
+                } else {
+                    errorMessage += 'Please try again or contact me directly at ensarjanova121@gmail.com';
+                }
+                
+                document.getElementById('formError').textContent = errorMessage;
+                document.getElementById('formError').style.display = 'block';
+                
+                // Save to localStorage as failed attempt with error details
+                const contactData = {
+                    name: name.trim(),
+                    email: email.trim(),
+                    subject: subject.trim(),
+                    message: message.trim(),
+                    timestamp: new Date().toISOString(),
+                    status: 'failed',
+                    error: error.text,
+                    error_code: error.status
+                };
+                
+                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+                contacts.push(contactData);
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                // Reset button state with error animation
+                submitButton.disabled = false;
+                buttonText.textContent = 'Try Again';
+                loadingIndicator.style.display = 'none';
+                
+                // Error animation
+                submitButton.style.background = 'linear-gradient(45deg, #ff6b6b, #ff5252)';
+                setTimeout(() => {
+                    submitButton.style.background = 'linear-gradient(45deg, var(--primary), var(--accent))';
+                    buttonText.textContent = 'Send Message';
+                }, 3000);
+            });
+    });
+
+    // Add real-time validation
+    document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(input => {
+        input.addEventListener('input', function() {
+            const errorElement = document.getElementById(this.id + 'Error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>

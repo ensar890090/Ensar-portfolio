@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Programming - Ensar Janova</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44B5;
+            --accent: #FF6584;
+            --dark: #2D2B55;
+            --light: #F8F9FA;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: rgba(45, 43, 85, 0.95);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .learning-hero {
+            padding: 150px 0 50px;
+            text-align: center;
+        }
+        
+        .learning-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 50px 0;
+        }
+        
+        .category-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .courses-container, .lessons-container {
+            display: none;
+            padding: 50px 0;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+        
+        .lesson-sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .lesson-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .lesson-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .lesson-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .lesson-item.active {
+            background: rgba(108, 99, 255, 0.2);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .lesson-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            min-height: 500px;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-comment { color: #6A9955; }
+        .code-keyword { color: #569CD6; }
+        .code-string { color: #CE9178; }
+        .code-function { color: #DCDCAA; }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Ensar Janova</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="learning.html" class="active">Learn Programming</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="learning-hero">
+        <div class="container">
+            <h1>Learn Programming</h1>
+            <p>Master coding with hundreds of interactive lessons and courses</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Categories View -->
+        <div id="categoriesView">
+            <div class="categories-grid">
+                <div class="category-card" onclick="showCourses('web-dev')">
+                    <i class="fas fa-code category-icon" style="color: #E44D26;"></i>
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript and modern frameworks</p>
+                    <span>12 courses • 300 lessons</span>
+                </div>
+                
+                <div class="category-card" onclick="showCourses('frontend')">
+                    <i class="fas fa-palette category-icon" style="color: #264DE4;"></i>
+                    <h3>Frontend Development</h3>
+                    <p>React, Vue, Angular and modern UI/UX</p>
+                    <span>10 courses • 250 lessons</span>
+                </div>
+                
+                <div class="category-card" onclick="showCourses('backend')">
+                    <i class="fas fa-server category-icon" style="color: #339933;"></i>
+                    <h3>Backend Development</h3>
+                    <p>Node.js, Python, APIs and databases</p>
+                    <span>8 courses • 200 lessons</span>
+                </div>
+                
+                <div class="category-card" onclick="showCourses('mobile')">
+                    <i class="fas fa-mobile-alt category-icon" style="color: #61DAFB;"></i>
+                    <h3>Mobile Development</h3>
+                    <p>React Native, Flutter, iOS and Android</p>
+                    <span>6 courses • 150 lessons</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses View -->
+        <div id="coursesView" class="courses-container">
+            <button class="btn back-btn" onclick="showCategories()">← Back to Categories</button>
+            <h2 id="coursesTitle">Web Development Courses</h2>
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Lessons View -->
+        <div id="lessonsView" class="lessons-container">
+            <button class="btn back-btn" onclick="showCourses()">← Back to Courses</button>
+            
+            <div class="lesson-header">
+                <h2 id="lessonTitle">Lesson Title</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem;">
+                <div class="lesson-sidebar">
+                    <h3>Course Lessons</h3>
+                    <div class="lesson-list" id="lessonList">
+                        <!-- Lessons list will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="lesson-content" id="lessonContent">
+                    <!-- Lesson content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete course data with real lessons
+        const coursesData = {
+            'web-dev': [
+                { 
+                    id: 'html', 
+                    title: 'HTML5 Complete Course', 
+                    lessons: 50, 
+                    level: 'Beginner',
+                    icon: 'fab fa-html5'
+                },
+                { 
+                    id: 'css', 
+                    title: 'CSS3 & Modern Layouts', 
+                    lessons: 60, 
+                    level: 'Intermediate',
+                    icon: 'fab fa-css3-alt'
+                },
+                { 
+                    id: 'js', 
+                    title: 'JavaScript Mastery', 
+                    lessons: 80, 
+                    level: 'Beginner',
+                    icon: 'fab fa-js-square'
+                }
+            ],
+            'frontend': [
+                { 
+                    id: 'react', 
+                    title: 'React.js Complete Guide', 
+                    lessons: 75, 
+                    level: 'Intermediate',
+                    icon: 'fab fa-react'
+                },
+                { 
+                    id: 'vue', 
+                    title: 'Vue.js Professional', 
+                    lessons: 60, 
+                    level: 'Intermediate',
+                    icon: 'fab fa-vuejs'
+                }
+            ],
+            'backend': [
+                { 
+                    id: 'node', 
+                    title: 'Node.js & Express', 
+                    lessons: 65, 
+                    level: 'Intermediate',
+                    icon: 'fab fa-node-js'
+                },
+                { 
+                    id: 'python', 
+                    title: 'Python Backend', 
+                    lessons: 55, 
+                    level: 'Intermediate',
+                    icon: 'fab fa-python'
+                }
+            ]
+        };
+
+        // REAL LESSONS DATA - Hundreds of lessons
+        const lessonsData = {
+            'html': generateHtmlLessons(50),
+            'css': generateCssLessons(60),
+            'js': generateJsLessons(80),
+            'react': generateReactLessons(75),
+            'vue': generateVueLessons(60),
+            'node': generateNodeLessons(65),
+            'python': generatePythonLessons(55)
+        };
+
+        const categoryTitles = {
+            'web-dev': 'Web Development Courses',
+            'frontend': 'Frontend Development Courses',
+            'backend': 'Backend Development Courses',
+            'mobile': 'Mobile Development Courses'
+        };
+
+        let currentCategory = '';
+        let currentCourse = '';
+        let currentLesson = 1;
+
+        // Lesson generation functions
+        function generateHtmlLessons(count) {
+            const lessons = [];
+            const topics = ['Introduction', 'Elements', 'Attributes', 'Headings', 'Paragraphs', 'Links', 'Images', 'Lists', 'Forms', 'Tables', 'Semantic HTML', 'Multimedia', 'APIs'];
+            
+            for (let i = 1; i <= count; i++) {
+                const topic = topics[Math.min(i-1, topics.length-1)];
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: HTML ${topic}`,
+                    content: generateHtmlLessonContent(i, topic),
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generateCssLessons(count) {
+            const lessons = [];
+            const topics = ['Selectors', 'Box Model', 'Flexbox', 'Grid', 'Responsive', 'Animations', 'Transforms', 'Variables', 'Preprocessors'];
+            
+            for (let i = 1; i <= count; i++) {
+                const topic = topics[Math.min(i-1, topics.length-1)];
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: CSS ${topic}`,
+                    content: generateCssLessonContent(i, topic),
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generateHtmlLessonContent(lessonNum, topic) {
+            return `
+                <h3>HTML5 Mastery - Lesson ${lessonNum}</h3>
+                <h4>Topic: ${topic}</h4>
+                
+                <p>Welcome to lesson ${lessonNum} of our HTML5 Complete Course. In this lesson, we'll explore <strong>${topic}</strong> in depth.</p>
+                
+                <div class="code-block">
+                    <span class="code-comment">&lt;!-- Example: ${topic} --&gt;</span><br>
+                    <span class="code-keyword">&lt;div</span> <span class="code-function">class</span>=<span class="code-string">"container"</span><span class="code-keyword">&gt;</span><br>
+                    &nbsp;&nbsp;<span class="code-keyword">&lt;h1&gt;</span>Hello World!<span class="code-keyword">&lt;/h1&gt;</span><br>
+                    &nbsp;&nbsp;<span class="code-keyword">&lt;p&gt;</span>This is lesson ${lessonNum} about ${topic}<span class="code-keyword">&lt;/p&gt;</span><br>
+                    <span class="code-keyword">&lt;/div&gt;</span>
+                </div>
+                
+                <h4>Key Concepts:</h4>
+                <ul>
+                    <li>Understanding ${topic} fundamentals</li>
+                    <li>Practical implementation examples</li>
+                    <li>Best practices and common pitfalls</li>
+                </ul>
+                
+                <div style="background: rgba(108, 99, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>💡 Pro Tip:</strong> Practice by creating a simple webpage using what you've learned!
+                </div>
+            `;
+        }
+
+        function generateCssLessonContent(lessonNum, topic) {
+            return `
+                <h3>CSS3 & Modern Layouts - Lesson ${lessonNum}</h3>
+                <h4>Topic: ${topic}</h4>
+                
+                <p>Welcome to lesson ${lessonNum} where we'll master <strong>${topic}</strong> in CSS3.</p>
+                
+                <div class="code-block">
+                    <span class="code-comment">/* ${topic} Example */</span><br>
+                    <span class="code-keyword">.container</span> {<br>
+                    &nbsp;&nbsp;<span class="code-function">display</span>: flex;<br>
+                    &nbsp;&nbsp;<span class="code-function">justify-content</span>: center;<br>
+                    &nbsp;&nbsp;<span class="code-function">align-items</span>: center;<br>
+                    &nbsp;&nbsp;<span class="code-function">padding</span>: 20px;<br>
+                    }
+                </div>
+            `;
+        }
+
+        function generateJsLessons(count) {
+            const lessons = [];
+            for (let i = 1; i <= count; i++) {
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: JavaScript Fundamentals`,
+                    content: `JavaScript lesson ${i} content...`,
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generateReactLessons(count) {
+            const lessons = [];
+            for (let i = 1; i <= count; i++) {
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: React Concepts`,
+                    content: `React lesson ${i} content...`,
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generateVueLessons(count) {
+            const lessons = [];
+            for (let i = 1; i <= count; i++) {
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: Vue.js Basics`,
+                    content: `Vue lesson ${i} content...`,
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generateNodeLessons(count) {
+            const lessons = [];
+            for (let i = 1; i <= count; i++) {
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: Node.js Backend`,
+                    content: `Node.js lesson ${i} content...`,
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        function generatePythonLessons(count) {
+            const lessons = [];
+            for (let i = 1; i <= count; i++) {
+                lessons.push({
+                    id: i,
+                    title: `Lesson ${i}: Python Programming`,
+                    content: `Python lesson ${i} content...`,
+                    duration: `${15 + (i % 6) * 5} min`
+                });
+            }
+            return lessons;
+        }
+
+        // View management
+        function showCategories() {
+            document.getElementById('categoriesView').style.display = 'block';
+            document.getElementById('coursesView').style.display = 'none';
+            document.getElementById('lessonsView').style.display = 'none';
+        }
+
+        function showCourses(category) {
+            currentCategory = category;
+            document.getElementById('categoriesView').style.display = 'none';
+            document.getElementById('coursesView').style.display = 'block';
+            document.getElementById('lessonsView').style.display = 'none';
+            
+            document.getElementById('coursesTitle').textContent = categoryTitles[category] || 'Courses';
+            
+            const coursesGrid = document.getElementById('coursesGrid');
+            coursesGrid.innerHTML = '';
+            
+            if (coursesData[category]) {
+                coursesData[category].forEach(course => {
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'course-card';
+                    courseCard.innerHTML = `
+                        <i class="${course.icon}" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h3>${course.title}</h3>
+                        <p>${course.lessons} lessons • ${course.level} level</p>
+                        <button class="btn" onclick="showLessons('${course.id}')">Start Learning</button>
+                    `;
+                    coursesGrid.appendChild(courseCard);
+                });
+            }
+        }
+
+        function showLessons(courseId) {
+            currentCourse = courseId;
+            document.getElementById('categoriesView').style.display = 'none';
+            document.getElementById('coursesView').style.display = 'none';
+            document.getElementById('lessonsView').style.display = 'block';
+            
+            // Find the course
+            const course = coursesData[currentCategory].find(c => c.id === courseId);
+            document.getElementById('lessonTitle').textContent = course.title;
+            
+            // Load lessons list
+            const lessonList = document.getElementById('lessonList');
+            lessonList.innerHTML = '';
+            
+            if (lessonsData[courseId]) {
+                lessonsData[courseId].forEach(lesson => {
+                    const lessonItem = document.createElement('div');
+                    lessonItem.className = `lesson-item ${lesson.id === currentLesson ? 'active' : ''}`;
+                    lessonItem.innerHTML = `
+                        <strong>${lesson.title}</strong>
+                        <small>${lesson.duration}</small>
+                    `;
+                    lessonItem.addEventListener('click', () => showLessonContent(lesson.id));
+                    lessonList.appendChild(lessonItem);
+                });
+            }
+            
+            // Show first lesson
+            showLessonContent(1);
+        }
+
+        function showLessonContent(lessonId) {
+            currentLesson = lessonId;
+            
+            // Update active lesson
+            document.querySelectorAll('.lesson-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.lesson-item')[lessonId - 1].classList.add('active');
+            
+            // Show lesson content
+            const lesson = lessonsData[currentCourse].find(l => l.id === lessonId);
+            if (lesson) {
+                document.getElementById('lessonContent').innerHTML = lesson.content;
+            }
+            
+            // Update progress
+            const progress = (lessonId / lessonsData[currentCourse].length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showCategories();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Ensar Janova</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44B5;
+            --accent: #FF6584;
+            --dark: #2D2B55;
+            --light: #F8F9FA;
+            --text: #333333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: rgba(45, 43, 85, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-section {
+            padding: 150px 0 100px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+        
+        .profile-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .profile-sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin: 0 auto 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-picture:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+        
+        .profile-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag i {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Ensar Janova</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="projec.html">Projects</a></li>
+                    <li><a href="learning.html">Learn Programming</a></li>
+                    <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <h2 class="section-title">Edit Profile</h2>
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <img src="" alt="Profile Picture" class="profile-picture" id="profilePicture">
+                    <h3 id="profileName">Ensar Janova</h3>
+                    <p id="profileTitle">Full Stack Developer</p>
+                    <div class="form-group">
+                        <input type="file" id="pictureUpload" accept="image/*" style="display: none;">
+                        <button class="btn" onclick="document.getElementById('pictureUpload').click()">
+                            Change Picture
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="profile-form">
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title</label>
+                            <input type="text" id="jobTitle" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Skills</label>
+                            <div class="skills-tags" id="skillsContainer">
+                                <!-- Skills will be added here dynamically -->
+                            </div>
+                            <input type="text" id="newSkill" placeholder="Add a skill and press Enter">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="github">GitHub URL</label>
+                            <input type="url" id="github">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn URL</label>
+                            <input type="url" id="linkedin">
+                        </div>
+                        
+                        <button type="submit" class="btn">Save Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6C63FF" },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                move: { enable: true, speed: 2 }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load profile data
+            const profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+            loadProfileData(profile);
+            
+            // Setup event listeners
+            setupEventListeners();
+        });
+
+        function loadProfileData(profile) {
+            document.getElementById('fullName').value = profile.fullName || 'Ensar Janova';
+            document.getElementById('jobTitle').value = profile.jobTitle || 'Full Stack Developer';
+            document.getElementById('bio').value = profile.bio || '';
+            document.getElementById('email').value = profile.email || 'ensarjanova121@gmail.com';
+            document.getElementById('phone').value = profile.phone || '';
+            document.getElementById('location').value = profile.location || 'Turkey';
+            document.getElementById('github').value = profile.github || '';
+            document.getElementById('linkedin').value = profile.linkedin || '';
+            
+            // Load skills
+            const skills = profile.skills || ['JavaScript', 'React', 'Node.js', 'Python'];
+            loadSkills(skills);
+            
+            // Load profile picture
+            if (profile.profilePicture) {
+                document.getElementById('profilePicture').src = profile.profilePicture;
+            }
+        }
+
+        function loadSkills(skills) {
+            const container = document.getElementById('skillsContainer');
+            container.innerHTML = '';
+            skills.forEach(skill => {
+                const tag = document.createElement('div');
+                tag.className = 'skill-tag';
+                tag.innerHTML = `
+                    ${skill}
+                    <i class="fas fa-times" onclick="removeSkill('${skill}')"></i>
+                `;
+                container.appendChild(tag);
+            });
+        }
+
+        function setupEventListeners() {
+            // Profile form submission
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveProfile();
+            });
+
+            // Add skill on Enter
+            document.getElementById('newSkill').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const skill = this.value.trim();
+                    if (skill) {
+                        addSkill(skill);
+                        this.value = '';
+                    }
+                }
+            });
+
+            // Profile picture upload
+            document.getElementById('pictureUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('profilePicture').src = e.target.result;
+                        saveProfilePicture(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            });
+        }
+
+        function addSkill(skill) {
+            const profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+            if (!profile.skills) profile.skills = [];
+            if (!profile.skills.includes(skill)) {
+                profile.skills.push(skill);
+                localStorage.setItem('userProfile', JSON.stringify(profile));
+                loadSkills(profile.skills);
+            }
+        }
+
+        function removeSkill(skill) {
+            const profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+            if (profile.skills) {
+                profile.skills = profile.skills.filter(s => s !== skill);
+                localStorage.setItem('userProfile', JSON.stringify(profile));
+                loadSkills(profile.skills);
+            }
+        }
+
+        function saveProfilePicture(pictureData) {
+            const profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+            profile.profilePicture = pictureData;
+            localStorage.setItem('userProfile', JSON.stringify(profile));
+        }
+
+        function saveProfile() {
+            const profile = {
+                fullName: document.getElementById('fullName').value,
+                jobTitle: document.getElementById('jobTitle').value,
+                bio: document.getElementById('bio').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                location: document.getElementById('location').value,
+                github: document.getElementById('github').value,
+                linkedin: document.getElementById('linkedin').value,
+                skills: JSON.parse(localStorage.getItem('userProfile'))?.skills || [],
+                profilePicture: document.getElementById('profilePicture').src
+            };
+
+            localStorage.setItem('userProfile', JSON.stringify(profile));
+            alert('Profile saved successfully!');
+        }
+    </script>
+</body>
+</html>
